@@ -1,4 +1,9 @@
-const Cart = ({ cart, emptyCart }) => {
+import { useContext } from "react";
+import { CartContext } from "../context/CartContext";
+
+const Cart = () => {
+
+  const {cart,emptyCart}=useContext(CartContext);
   const total = cart.reduce((acc, item) => acc + item.price, 0)
 
   if (cart.length === 0) return;
@@ -7,7 +12,7 @@ const Cart = ({ cart, emptyCart }) => {
       <h2 className="text-2xl font-semibold mb-4">Sepet</h2>
       <ul>
         {cart.map((item) => (
-          <li className="mt-2 flex justify-between">
+          <li className="mt-2 flex justify-between" key={item.id}>
             <span>{item.name}</span>
             <span>{item.price} TL</span>
           </li>
